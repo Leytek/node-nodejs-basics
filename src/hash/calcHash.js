@@ -4,10 +4,10 @@ import url from 'url';
 import crypto from 'crypto';
 import events from 'events';
 
-const _dirname = path.dirname(url.fileURLToPath(import.meta.url));
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 export const calculateHash = async () => {
-  const filePath = path.join(_dirname, 'files', 'fileToCalculateHashFor.txt');
+  const filePath = path.join(__dirname, 'files', 'fileToCalculateHashFor.txt');
   const file = await fs.open(filePath);
   const fileStream = file.createReadStream();
   const hash = crypto.createHash('sha256');
