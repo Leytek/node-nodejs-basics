@@ -8,7 +8,7 @@ export const spawnChildProcess = async (args) => {
   const scriptPath = path.join(__dirname, 'files', 'script.js');
   const newArgs = [scriptPath, ...args];
 
-  cp.spawn(`node`, newArgs, {stdio: ['inherit', 'inherit', 'inherit']});
+  cp.spawn(`node`, newArgs, {stdio: 'inherit'});
 };
 
 spawnChildProcess(['arg1', 'arg2']);
