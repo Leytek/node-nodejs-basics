@@ -1,3 +1,15 @@
+import fs from 'fs/promises';
+import path from 'path';
+import url from 'url';
+
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+
 export const read = async () => {
-    // Write your code here 
+    const filePath = path.join(__dirname, 'files', 'fileToRead.txt');
+    const file = await fs.open(filePath);
+    const fileStream = file.createReadStream();
+
+    fileStream.pipe(process.stdout);
 };
+
+read();
