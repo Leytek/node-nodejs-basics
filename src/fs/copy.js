@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
-import url from 'url'
+import url from 'url';
 
 const _dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
