@@ -5,11 +5,11 @@ import url from 'url';
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 export const read = async () => {
-    const filePath = path.join(__dirname, 'files', 'fileToRead.txt');
-    const file = await fs.open(filePath);
-    const fileStream = file.createReadStream();
+  const filePath = path.join(__dirname, 'files', 'fileToRead.txt');
+  const file = await fs.open(filePath);
+  const fileStream = file.createReadStream();
 
-    fileStream.pipe(process.stdout);
+  fileStream.pipe(process.stdout);
 };
 
 read();
