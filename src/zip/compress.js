@@ -2,7 +2,6 @@ import fs from 'fs/promises';
 import path from 'path';
 import url from 'url';
 import zlib from 'zlib';
-import events from 'events';
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
