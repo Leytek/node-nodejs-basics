@@ -13,7 +13,7 @@ export const calculateHash = async () => {
   const hash = crypto.createHash('sha256');
 
   fileStream.pipe(hash);
-  await events.once(fileStream, 'end');
+  await events.once(hash, 'finish');
   return hash.digest('hex');
 };
 
