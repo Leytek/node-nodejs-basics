@@ -1,16 +1,18 @@
 import fs from 'fs/promises';
 import path from 'path';
-import url from 'url';
+import getModulePaths from '../utils/getModulePaths.js';
 
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+const { __dirname } = getModulePaths(import.meta);
 
 export const list = async () => {
   const filesDir = path.join(__dirname, 'files');
-  const files = await fs.readdir(filesDir).catch(e => {
-    throw new Error('FS operation failed');
-  });
 
-  console.log(files);
+  try {
+    const files = await fs.readdir(filesDir);
+    console.log(files);
+  } catch (_) {
+    throw new Error('FS operation failed');
+  }
 };
 
 list();

@@ -1,21 +1,18 @@
 import fs from 'fs/promises';
 import path from 'path';
-import url from 'url';
+import getModulePaths from '../utils/getModulePaths.js';
 
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+const { __dirname } = getModulePaths(import.meta);
 
 export const copy = async () => {
-  const dir = await fs.readdir(__dirname);
-  const dirFromName = 'files';
-  const dirToName = 'files_copy';
+  const src = path.join(__dirname, 'files');
+  const dest = path.join(__dirname, 'files_copy');
 
-  if(dir.includes(dirToName) || !dir.includes(dirFromName)) {
+  try {
+    await fs.cp(src, dest, {errorOnExist: true, force: false, recursive: true});
+  } catch (_) {
     throw new Error('FS operation failed');
   }
-
-  const dirFromPath = path.join(__dirname, dirFromName);
-  const dirToPath = path.join(__dirname, dirToName);
-  fs.cp(dirFromPath, dirToPath, {recursive: true});
 };
 
 copy();

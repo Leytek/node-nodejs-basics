@@ -1,20 +1,17 @@
 import fs from 'fs/promises';
 import path from 'path';
-import url from 'url';
+import getModulePaths from '../utils/getModulePaths.js';
 
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+const { __dirname } = getModulePaths(import.meta);
 
 export const create = async () => {
-  const filesDir = path.join(__dirname, 'files');
-  const files = await fs.readdir(filesDir);
-  const fileName = 'fresh.txt';
+  const filePath = path.join(__dirname, 'files', 'fresh.txt');
 
-  if(files.includes(fileName)) {
+  try {
+    await fs.writeFile(filePath, 'I am fresh and young', {flag: "wx"});
+  } catch (_) {
     throw new Error('FS operation failed');
   }
-
-  const filePath = path.join(filesDir, fileName);
-  fs.writeFile(filePath, 'I am fresh and young');
 };
 
 create();
