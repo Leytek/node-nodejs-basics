@@ -1,6 +1,5 @@
 import path from 'path';
 import url from 'url';
-import fs from 'fs/promises';
 import { release, version } from 'os';
 import { createServer as createServerHttp } from 'http';
 import './files/c.js';
@@ -13,11 +12,10 @@ const random = Math.random();
 let unknownObject;
 
 if (random > 0.5) {
-    unknownObject = await fs.readFile(path.join(__dirname, './files/a.json'));
+    ({default: unknownObject} = await import('./files/a.json', {assert: {type: 'json'}}));
 } else {
-    unknownObject = await fs.readFile(path.join(__dirname, './files/b.json'));
+    ({default: unknownObject} = await import('./files/b.json', {assert: {type: 'json'}}));
 }
-unknownObject = JSON.parse(unknownObject);
 
 console.log(`Release ${release()}`);
 console.log(`Version ${version()}`);
@@ -34,4 +32,3 @@ export default {
     unknownObject,
     createMyServer,
 };
-
