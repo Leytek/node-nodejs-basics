@@ -1,8 +1,8 @@
 import fs from 'fs/promises';
 import path from 'path';
-import url from 'url';
+import getModulePaths from '../utils/getModulePaths.js';
 
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+const {__dirname} = getModulePaths(import.meta);
 
 export const write = async () => {
   const filePath = path.join(__dirname, 'files', 'fileToWrite.txt');

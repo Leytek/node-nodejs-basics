@@ -1,9 +1,9 @@
 import fs from 'fs/promises';
 import path from 'path';
-import url from 'url';
 import zlib from 'zlib';
+import getModulePaths from '../utils/getModulePaths.js';
 
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+const {__dirname} = getModulePaths(import.meta);
 
 export const compress = async () => {
   const fileFromPath = path.join(__dirname, 'files', 'fileToCompress.txt');

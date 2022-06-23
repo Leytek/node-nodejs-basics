@@ -1,10 +1,10 @@
 import fs from 'fs/promises';
 import path from 'path';
-import url from 'url';
 import crypto from 'crypto';
 import events from 'events';
+import getModulePaths from '../utils/getModulePaths.js';
 
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+const { __dirname } = getModulePaths(import.meta);
 
 export const calculateHash = async () => {
   const filePath = path.join(__dirname, 'files', 'fileToCalculateHashFor.txt');
