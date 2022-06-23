@@ -3,7 +3,10 @@ import stream from 'stream';
 export const transform = async () => {
   const transformStream = new stream.Transform({
     transform(chunk, encoding, callback) {
-      callback(null, chunk.toString().trim().split``.reverse().join`` + '\n');
+      const stringedChunk = chunk.toString();
+      const reversedString = stringedChunk.split``.reverse().join``;
+      const result = reversedString.trim() + '\n';
+      callback(null, result);
     }
   });
 
